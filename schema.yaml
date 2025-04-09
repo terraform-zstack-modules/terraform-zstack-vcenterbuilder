@@ -1,10 +1,185 @@
 openapi: 3.0.3
 info:
-  title: OpenAPI schema for template walrus-template-template
+  title: OpenAPI schema for template .
 components:
   schemas:
     variables:
       type: object
+      required:
+      - esxi_host_ip
+      - esxi_network
+      - esxi_password
+      - vcenter_host_gateway
+      - vcenter_host_ip
+      - vcenter_hostname
+      - vcenter_os_password
+      - vcenter_sso_password
+      - vcenter_version
+      properties:
+        image_name:
+          title: Image Name
+          type: string
+          description: Name for the vcenter_builder image
+          default: vcenter-builder-by-terraform
+          x-walrus-ui:
+            group: Basic
+            order: 2
+        image_url:
+          title: Image Url
+          type: string
+          description: URL to download the image from
+          default: http://minio.zstack.io:9001/packer/keycloak-by-packer-image-compressed.qcow2
+          x-walrus-ui:
+            group: Basic
+            order: 3
+        backup_storage_name:
+          title: Backup Storage Name
+          type: string
+          description: Name of the backup storage to use
+          default: bs
+          x-walrus-ui:
+            group: Basic
+            order: 4
+        instance_name:
+          title: Instance Name
+          type: string
+          description: Name for the vcenter_builder instance
+          default: vcenter_builder
+          x-walrus-ui:
+            group: Basic
+            order: 5
+        l3_network_name:
+          title: L3 Network Name
+          type: string
+          description: Name of the L3 network to use
+          default: test
+          x-walrus-ui:
+            group: Basic
+            order: 6
+        instance_offering_name:
+          title: Instance Offering Name
+          type: string
+          description: Name of the instance offering to use
+          default: min
+          x-walrus-ui:
+            group: Basic
+            order: 7
+        ssh_user:
+          title: Ssh User
+          type: string
+          description: SSH username for remote access
+          default: zstack
+          x-walrus-ui:
+            group: Basic
+            order: 8
+        ssh_password:
+          title: Ssh Password
+          type: string
+          description: SSH password for remote access
+          default: ZStack@123
+          format: password
+          writeOnly: true
+          x-walrus-ui:
+            group: Basic
+            order: 9
+        esxi_host_ip:
+          title: Esxi Host Ip
+          type: string
+          description: The IP address of the ESXi host
+          x-walrus-ui:
+            group: Basic
+            order: 10
+        esxi_username:
+          title: Esxi Username
+          type: string
+          description: The username for the ESXi host
+          default: root
+          x-walrus-ui:
+            group: Basic
+            order: 11
+        esxi_password:
+          title: Esxi Password
+          type: string
+          description: The password for the ESXi host
+          format: password
+          writeOnly: true
+          x-walrus-ui:
+            group: Basic
+            order: 12
+        esxi_network:
+          title: Esxi Network
+          type: string
+          description: The deployment network name in ESXi
+          x-walrus-ui:
+            group: Basic
+            order: 13
+        vcenter_hostname:
+          title: Vcenter Hostname
+          type: string
+          description: The name of the vCenter VM to deploy
+          x-walrus-ui:
+            group: Basic
+            order: 14
+        vcenter_host_ip:
+          title: Vcenter Host Ip
+          type: string
+          description: The static IP address of the vCenter appliance
+          x-walrus-ui:
+            group: Basic
+            order: 15
+        vcenter_host_gateway:
+          title: Vcenter Host Gateway
+          type: string
+          description: The gateway IP for the vCenter appliance
+          x-walrus-ui:
+            group: Basic
+            order: 16
+        vcenter_host_prefix:
+          title: Vcenter Host Prefix
+          type: string
+          description: The CIDR prefix (e.g., 24) for the vCenter network
+          default: "16"
+          x-walrus-ui:
+            group: Basic
+            order: 17
+        dns_servers:
+          title: Dns Servers
+          type: array
+          description: List of DNS server IPs
+          default:
+          - 223.5.5.5
+          items:
+            type: string
+          x-walrus-ui:
+            colSpan: 12
+            group: Basic
+            order: 18
+        vcenter_os_password:
+          title: Vcenter Os Password
+          type: string
+          description: Password for the vCenter OS root user
+          format: password
+          writeOnly: true
+          x-walrus-ui:
+            group: Basic
+            order: 19
+        vcenter_sso_password:
+          title: Vcenter Sso Password
+          type: string
+          description: Password for the SSO administrator
+          format: password
+          writeOnly: true
+          x-walrus-ui:
+            group: Basic
+            order: 20
+        vcenter_version:
+          title: Vcenter Version
+          type: string
+          description: 'The version of vCenter to deploy (allowed: 6.0, 6.5, 6.7,
+            7.0, 8.0)'
+          x-walrus-ui:
+            group: Basic
+            order: 21
       x-walrus-ui:
         groupOrder:
         - Basic
