@@ -65,3 +65,7 @@
 | <a name="output_walrus_resource_id"></a> [walrus\_resource\_id](#output\_walrus\_resource\_id) | The id of resource where deployed in Walrus. |
 | <a name="output_walrus_resource_name"></a> [walrus\_resource\_name](#output\_walrus\_resource\_name) | The name of resource where deployed in Walrus. |
 <!-- END_TF_DOCS -->
+
+## 前提条件
+- 需要有ESXI环境，如果没有通过http://172.20.14.17/jiajian.chi/terraform-zstack-esxi 建一个
+- 如果要把对应的ESXI的主机加进来，主要版本兼容性。
