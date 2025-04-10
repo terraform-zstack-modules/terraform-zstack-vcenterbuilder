@@ -37,5 +37,7 @@ output "vcenter_ip" {
 }
 
 output "endpoints" {
-  vcenter_console = "https://${var.vcenter_host_ip}"
+  value = {
+    vcenter_console = "https://${var.vcenter_host_ip}"
+  }
 }
