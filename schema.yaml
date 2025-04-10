@@ -24,6 +24,15 @@ components:
           x-walrus-ui:
             group: Basic
             order: 2
+        create_image:
+          title: Create Image
+          type: boolean
+          description: Flag to determine whether to create the image. Set to true
+            to create the image, false to use image name to search in backupstorage.
+          default: true
+          x-walrus-ui:
+            group: Basic
+            order: 3
         image_url:
           title: Image Url
           type: string

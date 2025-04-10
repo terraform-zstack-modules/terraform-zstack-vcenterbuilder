@@ -30,10 +30,16 @@ variable "image_name" {
   default     = "vcenter-builder-by-terraform"
 }
 
+variable "create_image" {
+  description = "Flag to determine whether to create the image. Set to true to create the image, false to use image name to search in backupstorage."
+  type        = bool
+  default     = true
+}
+
 variable "image_url" {
   description = "URL to download the image from"
   type        = string
-  default     = "http://minio.zstack.io:9001/packer/keycloak-by-packer-image-compressed.qcow2"
+  default     = "http://192.168.200.100/mirror/jiajian.chi/os/base/vcsa_builder_compressed.qcow2"
 }
 
 variable "backup_storage_name" {

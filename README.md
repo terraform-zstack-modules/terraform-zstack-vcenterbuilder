@@ -33,13 +33,14 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_backup_storage_name"></a> [backup\_storage\_name](#input\_backup\_storage\_name) | Name of the backup storage to use | `string` | `"bs"` | no |
 | <a name="input_context"></a> [context](#input\_context) | Receive contextual information. When Walrus deploys, Walrus will inject specific contextual information into this field.<br/><br/>Examples:<pre>context:<br/>  project:<br/>    name: string<br/>    id: string<br/>  environment:<br/>    name: string<br/>    id: string<br/>  resource:<br/>    name: string<br/>    id: string</pre> | `map(any)` | `{}` | no |
+| <a name="input_create_image"></a> [create\_image](#input\_create\_image) | Flag to determine whether to create the image. Set to true to create the image, false to use image name to search in backupstorage. | `bool` | `true` | no |
 | <a name="input_dns_servers"></a> [dns\_servers](#input\_dns\_servers) | List of DNS server IPs | `list(string)` | <pre>[<br/>  "223.5.5.5"<br/>]</pre> | no |
 | <a name="input_esxi_host_ip"></a> [esxi\_host\_ip](#input\_esxi\_host\_ip) | The IP address of the ESXi host | `string` | n/a | yes |
 | <a name="input_esxi_network"></a> [esxi\_network](#input\_esxi\_network) | The deployment network name in ESXi | `string` | n/a | yes |
 | <a name="input_esxi_password"></a> [esxi\_password](#input\_esxi\_password) | The password for the ESXi host | `string` | n/a | yes |
 | <a name="input_esxi_username"></a> [esxi\_username](#input\_esxi\_username) | The username for the ESXi host | `string` | `"root"` | no |
 | <a name="input_image_name"></a> [image\_name](#input\_image\_name) | Name for the vcenter\_builder image | `string` | `"vcenter-builder-by-terraform"` | no |
-| <a name="input_image_url"></a> [image\_url](#input\_image\_url) | URL to download the image from | `string` | `"http://minio.zstack.io:9001/packer/keycloak-by-packer-image-compressed.qcow2"` | no |
+| <a name="input_image_url"></a> [image\_url](#input\_image\_url) | URL to download the image from | `string` | `"http://192.168.200.100/mirror/jiajian.chi/os/base/vcsa_builder_compressed.qcow2"` | no |
 | <a name="input_instance_name"></a> [instance\_name](#input\_instance\_name) | Name for the vcenter\_builder instance | `string` | `"vcenter_builder"` | no |
 | <a name="input_instance_offering_name"></a> [instance\_offering\_name](#input\_instance\_offering\_name) | Name of the instance offering to use | `string` | `"min"` | no |
 | <a name="input_l3_network_name"></a> [l3\_network\_name](#input\_l3\_network\_name) | Name of the L3 network to use | `string` | `"test"` | no |
@@ -65,7 +66,3 @@
 | <a name="output_walrus_resource_id"></a> [walrus\_resource\_id](#output\_walrus\_resource\_id) | The id of resource where deployed in Walrus. |
 | <a name="output_walrus_resource_name"></a> [walrus\_resource\_name](#output\_walrus\_resource\_name) | The name of resource where deployed in Walrus. |
 <!-- END_TF_DOCS -->
-
-## 前提条件
-- 需要有ESXI环境，如果没有通过http://172.20.14.17/jiajian.chi/terraform-zstack-esxi 建一个
-- 如果要把对应的ESXI的主机加进来，主要版本兼容性。

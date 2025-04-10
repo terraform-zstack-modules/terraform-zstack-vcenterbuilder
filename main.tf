@@ -5,7 +5,7 @@ locals {
 module "vcenter_builder_image" {
   source = "git::http://172.20.14.17/jiajian.chi/terraform-zstack-image.git"
 
-  create_image        = true
+  create_image        = var.create_image
   image_name          = var.image_name
   image_url           = var.image_url
   guest_os_type      = "Centos 7"
