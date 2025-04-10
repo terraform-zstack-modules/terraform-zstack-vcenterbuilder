@@ -32,11 +32,6 @@ output "walrus_resource_id" {
   description = "The id of resource where deployed in Walrus."
 }
 
-#
-# Submodule output
-#
-
-output "submodule" {
-  value       = module.submodule.message
-  description = "The message from submodule."
+output "vcenter_ip" {
+  value = var.vcenter_host_ip
 }

@@ -63,7 +63,7 @@ resource "terraform_data" "remote_exec" {
   provisioner "remote-exec" {
     inline = [
       "set -e",
-      "cd /home/zstack/vcsa/${vcenter_version}/vcsa-cli-installer/lin64",
+      "cd /home/zstack/vcsa/${var.vcenter_version}/vcsa-cli-installer/lin64",
       "./vcsa-deploy install --accept-eula --no-ssl-certificate-verification /home/zstack/vcsa/install.json"
     ]
     on_failure = fail
