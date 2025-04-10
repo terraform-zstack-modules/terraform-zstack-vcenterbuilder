@@ -95,11 +95,13 @@ variable "esxi_password" {
   type        = string
   description = "The password for the ESXi host"
   sensitive   = true
+  default     = "ZStack@123"
 }
 
 variable "esxi_network" {
   type        = string
   description = "The deployment network name in ESXi"
+  default     = "VM Network"
 }
 
 variable "vcenter_hostname" {
@@ -133,12 +135,14 @@ variable "vcenter_os_password" {
   type        = string
   description = "Password for the vCenter OS root user"
   sensitive   = true
+  default     = "ZStack@123"
 }
 
 variable "vcenter_sso_password" {
   type        = string
   description = "Password for the SSO administrator"
   sensitive   = true
+  default     = "ZStack@123"
 }
 
 variable "vcenter_version" {
@@ -146,7 +150,7 @@ variable "vcenter_version" {
   description = "The version of vCenter to deploy (allowed: 6.0, 6.5, 6.7, 7.0, 8.0)"
 
   validation {
-    condition     = contains(["6.0", "6.5", "6.7", "7.0", "8.0"], var.vcenter_version)
-    error_message = "vcenter_version must be one of: 6.0, 6.5, 6.7, 7.0, 8.0"
+    condition     = contains(["7.0", "8.0"], var.vcenter_version)
+    error_message = "vcenter_version must be one of: 7.0, 8.0"
   }
 }

@@ -35,3 +35,7 @@ output "walrus_resource_id" {
 output "vcenter_ip" {
   value = var.vcenter_host_ip
 }
+
+output "endpoints" {
+  vcenter_console = "https://${var.vcenter_host_ip}"
+}

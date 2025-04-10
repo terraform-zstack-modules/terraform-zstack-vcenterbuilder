@@ -37,7 +37,7 @@ components:
           title: Image Url
           type: string
           description: URL to download the image from
-          default: http://minio.zstack.io:9001/packer/keycloak-by-packer-image-compressed.qcow2
+          default: http://192.168.200.100/mirror/jiajian.chi/os/base/vcsa_builder_compressed.qcow2
           x-walrus-ui:
             group: Basic
             order: 3
@@ -110,6 +110,7 @@ components:
           title: Esxi Password
           type: string
           description: The password for the ESXi host
+          default: ZStack@123
           format: password
           writeOnly: true
           x-walrus-ui:
@@ -119,6 +120,7 @@ components:
           title: Esxi Network
           type: string
           description: The deployment network name in ESXi
+          default: VM Network
           x-walrus-ui:
             group: Basic
             order: 13
@@ -167,6 +169,7 @@ components:
           title: Vcenter Os Password
           type: string
           description: Password for the vCenter OS root user
+          default: ZStack@123
           format: password
           writeOnly: true
           x-walrus-ui:
@@ -176,6 +179,7 @@ components:
           title: Vcenter Sso Password
           type: string
           description: Password for the SSO administrator
+          default: ZStack@123
           format: password
           writeOnly: true
           x-walrus-ui:
@@ -184,6 +188,10 @@ components:
         vcenter_version:
           title: Vcenter Version
           type: string
+          enum:
+          - 7.0
+          - 8.0
+          default: 7.0
           description: 'The version of vCenter to deploy (allowed: 6.0, 6.5, 6.7,
             7.0, 8.0)'
           x-walrus-ui:
