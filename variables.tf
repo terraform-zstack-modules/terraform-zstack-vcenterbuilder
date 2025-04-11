@@ -154,3 +154,8 @@ variable "vcenter_version" {
     error_message = "vcenter_version must be one of: 7.0, 8.0"
   }
 }
+
+variable "expunge" {
+  type  = bool
+  default = true
+}

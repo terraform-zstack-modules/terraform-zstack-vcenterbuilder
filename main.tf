@@ -3,7 +3,7 @@ locals {
 }
 
 module "vcenter_builder_image" {
-  source = "git::http://172.20.14.17/jiajian.chi/terraform-zstack-image.git"
+  source = "git::http://172.20.14.17/jiajian.chi/terraform-zstack-image.git?ref=v1.1.1"
 
   create_image        = var.create_image
   image_name          = var.image_name
@@ -12,12 +12,13 @@ module "vcenter_builder_image" {
   platform           = "Linux"
   format             = "qcow2"
   architecture       = "x86_64"
+  expunge            = var.expunge
 
   backup_storage_name = var.backup_storage_name
 }
 
 module "vcenter_builder_instance" {
-  source = "git::http://172.20.14.17/jiajian.chi/terraform-zstack-instance.git"
+  source = "git::http://172.20.14.17/jiajian.chi/terraform-zstack-instance.git?ref=v1.1.1"
 
   name                  = var.instance_name
   description           = "Created by Terraform devops"
@@ -25,6 +26,7 @@ module "vcenter_builder_instance" {
   image_uuid            = module.vcenter_builder_image.image_uuid
   l3_network_name       = var.l3_network_name
   instance_offering_name = var.instance_offering_name
+  expunge            = var.expunge
 }
 
 resource "local_file" "install_json" {
