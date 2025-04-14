@@ -17,23 +17,32 @@ components:
       - vcenter_version
       properties:
         image_name:
-          title: Image Name
+          title: vcenter构建器镜像
           type: string
           description: Name for the vcenter_builder image
           default: vcenter-builder-by-terraform
           x-walrus-ui:
             group: Basic
             order: 2
+        create_image:
+          title: Create Image
+          type: boolean
+          description: Flag to determine whether to create the image. Set to true
+            to create the image, false to use image name to search in backupstorage.
+          default: true
+          x-walrus-ui:
+            group: Basic
+            order: 3
         image_url:
-          title: Image Url
+          title: 构建器镜像 Url
           type: string
           description: URL to download the image from
-          default: http://minio.zstack.io:9001/packer/keycloak-by-packer-image-compressed.qcow2
+          default: http://192.168.200.100/mirror/jiajian.chi/os/base/vcsa_builder_compressed.qcow2
           x-walrus-ui:
             group: Basic
             order: 3
         backup_storage_name:
-          title: Backup Storage Name
+          title: 镜像服务器
           type: string
           description: Name of the backup storage to use
           default: bs
@@ -41,7 +50,7 @@ components:
             group: Basic
             order: 4
         instance_name:
-          title: Instance Name
+          title: 构建器实例名
           type: string
           description: Name for the vcenter_builder instance
           default: vcenter_builder
@@ -49,7 +58,7 @@ components:
             group: Basic
             order: 5
         l3_network_name:
-          title: L3 Network Name
+          title: 三层网络
           type: string
           description: Name of the L3 network to use
           default: test
@@ -57,7 +66,7 @@ components:
             group: Basic
             order: 6
         instance_offering_name:
-          title: Instance Offering Name
+          title: 计算规格
           type: string
           description: Name of the instance offering to use
           default: min
@@ -69,6 +78,7 @@ components:
           type: string
           description: SSH username for remote access
           default: zstack
+          readOnly: true
           x-walrus-ui:
             group: Basic
             order: 8
@@ -77,58 +87,60 @@ components:
           type: string
           description: SSH password for remote access
           default: ZStack@123
-          format: password
-          writeOnly: true
+          readOnly: true
           x-walrus-ui:
             group: Basic
             order: 9
         esxi_host_ip:
-          title: Esxi Host Ip
+          title: Esxi主机IP
           type: string
           description: The IP address of the ESXi host
           x-walrus-ui:
             group: Basic
             order: 10
         esxi_username:
-          title: Esxi Username
+          title: Esxi用户名
           type: string
           description: The username for the ESXi host
           default: root
+          readOnly: true
           x-walrus-ui:
             group: Basic
             order: 11
         esxi_password:
-          title: Esxi Password
+          title: Esxi密码
           type: string
-          description: The password for the ESXi host
+          description: TEsxi密码，自动构建的无人值守密码，默认是ZStack@123
+          default: ZStack@123
           format: password
           writeOnly: true
           x-walrus-ui:
             group: Basic
             order: 12
         esxi_network:
-          title: Esxi Network
+          title: Esxi网络
           type: string
           description: The deployment network name in ESXi
+          default: VM Network
           x-walrus-ui:
             group: Basic
             order: 13
         vcenter_hostname:
-          title: Vcenter Hostname
+          title: Vcenter主机名
           type: string
           description: The name of the vCenter VM to deploy
           x-walrus-ui:
             group: Basic
             order: 14
         vcenter_host_ip:
-          title: Vcenter Host Ip
+          title: Vcenter Ip
           type: string
-          description: The static IP address of the vCenter appliance
+          description: vcenter_host_ip 的IP地址默认是ESXI网络的桥接，也是ZStack的扁平或公有网络，请注意不要冲突，不要填写任何0.1的网关地址
           x-walrus-ui:
             group: Basic
             order: 15
         vcenter_host_gateway:
-          title: Vcenter Host Gateway
+          title: Vcenter网关
           type: string
           description: The gateway IP for the vCenter appliance
           x-walrus-ui:
@@ -155,31 +167,39 @@ components:
             group: Basic
             order: 18
         vcenter_os_password:
-          title: Vcenter Os Password
+          title: Vcenter OS 密码
           type: string
           description: Password for the vCenter OS root user
+          default: ZStack@123
           format: password
           writeOnly: true
           x-walrus-ui:
             group: Basic
             order: 19
         vcenter_sso_password:
-          title: Vcenter Sso Password
+          title: Vcenter SSO 密码
           type: string
           description: Password for the SSO administrator
+          default: ZStack@123
           format: password
           writeOnly: true
           x-walrus-ui:
             group: Basic
             order: 20
         vcenter_version:
-          title: Vcenter Version
+          title: Vcenter版本
           type: string
-          description: 'The version of vCenter to deploy (allowed: 6.0, 6.5, 6.7,
-            7.0, 8.0)'
+          description: 'The version of vCenter to deploy (allowed: 7.0, 8.0)'
           x-walrus-ui:
             group: Basic
             order: 21
+        expunge:
+          title: Expunge
+          type: boolean
+          default: true
+          x-walrus-ui:
+            group: Basic
+            order: 23
       x-walrus-ui:
         groupOrder:
         - Basic

@@ -3,21 +3,22 @@ locals {
 }
 
 module "vcenter_builder_image" {
-  source = "git::http://172.20.14.17/jiajian.chi/terraform-zstack-image.git"
+  source = "git::https://github.com/terraform-zstack-modules/terraform-zstack-image.git"
 
-  create_image        = true
+  create_image        = var.create_image
   image_name          = var.image_name
   image_url           = var.image_url
   guest_os_type      = "Centos 7"
   platform           = "Linux"
   format             = "qcow2"
   architecture       = "x86_64"
+  expunge            = var.expunge
 
   backup_storage_name = var.backup_storage_name
 }
 
 module "vcenter_builder_instance" {
-  source = "git::http://172.20.14.17/jiajian.chi/terraform-zstack-instance.git"
+  source = "git::https://github.com/chijiajian/terraform-zstack-instance.git"
 
   name                  = var.instance_name
   description           = "Created by Terraform devops"
@@ -25,6 +26,7 @@ module "vcenter_builder_instance" {
   image_uuid            = module.vcenter_builder_image.image_uuid
   l3_network_name       = var.l3_network_name
   instance_offering_name = var.instance_offering_name
+  expunge            = var.expunge
 }
 
 resource "local_file" "install_json" {
@@ -63,7 +65,7 @@ resource "terraform_data" "remote_exec" {
   provisioner "remote-exec" {
     inline = [
       "set -e",
-      "cd /home/zstack/vcsa/${vcenter_version}/vcsa-cli-installer/lin64",
+      "cd /home/zstack/vcsa/${var.vcenter_version}/vcsa-cli-installer/lin64",
       "./vcsa-deploy install --accept-eula --no-ssl-certificate-verification /home/zstack/vcsa/install.json"
     ]
     on_failure = fail

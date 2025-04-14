@@ -30,10 +30,16 @@ variable "image_name" {
   default     = "vcenter-builder-by-terraform"
 }
 
+variable "create_image" {
+  description = "Flag to determine whether to create the image. Set to true to create the image, false to use image name to search in backupstorage."
+  type        = bool
+  default     = true
+}
+
 variable "image_url" {
   description = "URL to download the image from"
   type        = string
-  default     = "http://minio.zstack.io:9001/packer/keycloak-by-packer-image-compressed.qcow2"
+  default     = "http://192.168.200.100/mirror/jiajian.chi/os/base/vcsa_builder_compressed.qcow2"
 }
 
 variable "backup_storage_name" {
@@ -89,11 +95,13 @@ variable "esxi_password" {
   type        = string
   description = "The password for the ESXi host"
   sensitive   = true
+  default     = "ZStack@123"
 }
 
 variable "esxi_network" {
   type        = string
   description = "The deployment network name in ESXi"
+  default     = "VM Network"
 }
 
 variable "vcenter_hostname" {
@@ -127,12 +135,14 @@ variable "vcenter_os_password" {
   type        = string
   description = "Password for the vCenter OS root user"
   sensitive   = true
+  default     = "ZStack@123"
 }
 
 variable "vcenter_sso_password" {
   type        = string
   description = "Password for the SSO administrator"
   sensitive   = true
+  default     = "ZStack@123"
 }
 
 variable "vcenter_version" {
@@ -140,7 +150,12 @@ variable "vcenter_version" {
   description = "The version of vCenter to deploy (allowed: 6.0, 6.5, 6.7, 7.0, 8.0)"
 
   validation {
-    condition     = contains(["6.0", "6.5", "6.7", "7.0", "8.0"], var.vcenter_version)
-    error_message = "vcenter_version must be one of: 6.0, 6.5, 6.7, 7.0, 8.0"
+    condition     = contains(["7.0", "8.0"], var.vcenter_version)
+    error_message = "vcenter_version must be one of: 7.0, 8.0"
   }
+}
+
+variable "expunge" {
+  type  = bool
+  default = true
 }
