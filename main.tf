@@ -3,7 +3,7 @@ locals {
 }
 
 module "vcenter_builder_image" {
-  source = "git::http://172.20.14.17/jiajian.chi/terraform-zstack-image.git?ref=v1.1.1"
+  source = "git::https://github.com/terraform-zstack-modules/terraform-zstack-image.git"
 
   create_image        = var.create_image
   image_name          = var.image_name
@@ -18,7 +18,7 @@ module "vcenter_builder_image" {
 }
 
 module "vcenter_builder_instance" {
-  source = "git::http://172.20.14.17/jiajian.chi/terraform-zstack-instance.git?ref=v1.1.1"
+  source = "git::https://github.com/chijiajian/terraform-zstack-instance.git"
 
   name                  = var.instance_name
   description           = "Created by Terraform devops"
